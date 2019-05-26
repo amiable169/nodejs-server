@@ -1,0 +1,13 @@
+{
+  "name": "nodejs-server",
+  "version": "1.0.0",
+  "private": true,
+  "author": "GRW",
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "mysql": "^2.17.1"
+  }
+}
