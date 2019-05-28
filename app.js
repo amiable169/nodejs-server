@@ -13,10 +13,8 @@ app.use(bodyParser.json());
 //静态资源访问
 app.use('/static',  express.static(path.join('src', 'static')));
 //异常处理
-app.use(function (req, res, next) {
+app.use((req, res, next)=> {
     global.res = res;
     next();
 });
-app.listen(8888, function () {
-    console.log("启动成功");
-});
+app.listen(8888);

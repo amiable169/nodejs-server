@@ -15,15 +15,15 @@ module.exports = {
      * @param params
      * @returns {Promise}
      */
-    query: function (sql, params) {
+    query(sql, params) {
         const that = this;
         this._pool = mysql.createPool(mysqlConfig);
         if (!params) {
             params = [];
         }
-        return new Promise(function (resolve, reject) {
-            that._pool.getConnection(function (err, connection) {
-                connection.query(sql, params, function (err, results) {
+        return new Promise((resolve, reject)=> {
+            that._pool.getConnection((err, connection)=> {
+                connection.query(sql, params, (err, results)=> {
                     if (err) {
                         reject(err);
                     } else {
@@ -40,10 +40,10 @@ module.exports = {
      * @param params
      * @returns {Promise}
      */
-    queryForObject: function (sql, params) {
+    queryForObject(sql, params) {
         const that = this;
-        return new Promise(function (resolve, reject) {
-            that.query(sql, params).then(function (res) {
+        return new Promise((resolve, reject)=> {
+            that.query(sql, params).then(res=>{
                 if (res.length == 0) {
                     resolve(null);
                 } else if (res.length == 1) {
@@ -51,7 +51,7 @@ module.exports = {
                 } else {
                     reject("incorrect result size: expected 1, actual " + res.length);
                 }
-            }).catch(function (reason) {
+            }).catch(reason=> {
                 reject(reason);
             })
         });
@@ -62,12 +62,12 @@ module.exports = {
      * @param params
      * @returns {Promise}
      */
-    insert: function (sql, params) {
+    insert(sql, params) {
         const that = this;
-        return new Promise(function (resolve, reject) {
-            that.query(sql, params).then(function (res) {
+        return new Promise((resolve, reject)=> {
+            that.query(sql, params).then(res=> {
                 resolve(res);
-            }).catch(function (reason) {
+            }).catch(reason=> {
                 reject(reason);
             })
         });
@@ -78,12 +78,12 @@ module.exports = {
      * @param params
      * @returns {Promise}
      */
-    update: function (sql, params) {
+    update(sql, params) {
         const that = this;
-        return new Promise(function (resolve, reject) {
-            that.query(sql, params).then(function (res) {
+        return new Promise((resolve, reject)=> {
+            that.query(sql, params).then(res=> {
                 resolve(res);
-            }).catch(function (reason) {
+            }).catch(reason=> {
                 reject(reason);
             })
         });
@@ -94,12 +94,12 @@ module.exports = {
      * @param params
      * @returns {Promise}
      */
-    delete: function (sql, params) {
+    delete(sql, params) {
         const that = this;
-        return new Promise(function (resolve, reject) {
-            that.query(sql, params).then(function (res) {
+        return new Promise((resolve, reject)=> {
+            that.query(sql, params).then(res=> {
                 resolve(res);
-            }).catch(function (reason) {
+            }).catch(reason=> {
                 reject(reason);
             })
         });

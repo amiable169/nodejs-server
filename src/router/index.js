@@ -16,10 +16,6 @@ function isJSFile(file) {
  * @param obj
  */
 function checkRegular(obj, file, key) {
-    if (!obj.url && "" != obj.url) {
-        throw new Error("文件：" + file + "   方法：" + key + "url字段不存在");
-    }
-
     if (!obj.handle) {
         throw new Error("文件：" + file + "   方法：" + key + "handle字段不存在");
     } else {
@@ -41,26 +37,31 @@ function createRoute(app, file) {
     var instance = require(file);
     console.log("控制器", instance);
     for (let key in  instance) {
-        var obj = instance[key];
+
+        const obj = instance[key];
+        const url = (instance.url || '') + (obj.url || '');
+        if('url' == key){
+            continue;
+        }
         checkRegular(obj, file, key);
         switch (obj.method.toLowerCase()) {
             case 'get':
-                app.get(obj.url, obj.handle);
+                app.get(url, obj.handle);
                 break;
             case 'post':
-                app.post(obj.url, obj.handle);
+                app.post(url, obj.handle);
                 break;
             case 'put':
-                app.put(obj.url, obj.handle);
+                app.put(url, obj.handle);
                 break;
             case 'patch':
-                app.patch(obj.url, obj.handle);
+                app.patch(url, obj.handle);
                 break;
             case 'delete':
-                app.delete(obj.url, obj.handle);
+                app.delete(url, obj.handle);
                 break;
             default:
-                app.all(obj.url, obj.handle);
+                app.all(url, obj.handle);
         }
     }
 }
