@@ -86,3 +86,6 @@
 * model数据层（接入mysql，封装请求工具ndbcTemplate）
 * router路由层（主要实现拦截器和控制器自动注入）
 * static 静态资源存放目录，直接可访问 
+
+### 配套相应前端nodejs-vue进行测试  
+githup项目地址：[https://github.com/GRW999/nodejs-vue](https://github.com/GRW999/nodejs-vue)

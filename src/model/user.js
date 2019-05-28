@@ -18,5 +18,14 @@ module.exports = {
                 reject(err);
             })
         })
+    },
+    delete(id){
+        return new Promise((resolve, reject)=>{
+            ndbcTemplate.delete("delete from user_info where id=?", [id]).then(res=>{
+                resolve(res);
+            }).catch(err=>{
+                reject(err);
+            })
+        })
     }
 };

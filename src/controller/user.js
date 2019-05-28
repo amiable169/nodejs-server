@@ -1,4 +1,5 @@
-var userModel = require('../model/user');
+const userModel = require('../model/user');
+const BusinessException = require('../exception/BusinessException');
 
 module.exports = {
     url: '/user',
@@ -20,5 +21,15 @@ module.exports = {
             })
         }
     },
-
+    delete: {
+        url: '/:id',
+        method: 'delete',
+        handle(req, res){
+            userModel.delete(req.params.id).then(data=>{
+                res.end();
+            }).catch(err=> {
+                throw new BusinessException(40000, "删除失败");
+            })
+        }
+    }
 };
