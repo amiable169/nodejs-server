@@ -1,14 +1,14 @@
 var mysql = require('mysql');
-var mysqlConfig = {
+//采用连接池方式
+var pool = mysql.createPool({
     host: '127.0.0.1',
     port: '3306',
     user: 'root',
     password: '123456',
     database: 'test',
     charset: 'UTF8'   //字符编码需大写
-};
+});
 module.exports = {
-    _pool: null,
     /**
      * 查询，返回数组
      * @param sql
@@ -16,13 +16,11 @@ module.exports = {
      * @returns {Promise}
      */
     query(sql, params) {
-        const that = this;
-        this._pool = mysql.createPool(mysqlConfig);
         if (!params) {
             params = [];
         }
         return new Promise((resolve, reject)=> {
-            that._pool.getConnection((err, connection)=> {
+            pool.getConnection((err, connection)=> {
                 connection.query(sql, params, (err, results)=> {
                     if (err) {
                         reject(err);
