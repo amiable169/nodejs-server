@@ -25,7 +25,7 @@ app.use((err, req, res, next)=> {
             res.status(err.status).json({code: err.code, msg: err.msg});
         }else {
             console.log(moment().format('YYYY-MM-DD HH:mm:ss'),"系统异常", err);
-            res.status(500).json({code: '5000', msg: "系统异常"});
+            res.status(500).json({code: 5000, msg: "系统异常"});
         }
     }
 });
