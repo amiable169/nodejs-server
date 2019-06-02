@@ -28,7 +28,7 @@ module.exports = {
             userModel.delete(req.params.id).then(data=>{
                 res.end();
             }).catch(err=> {
-                throw new BusinessException(40000, "删除失败");
+                throw new BusinessException(4000, "删除失败");
             })
         }
     }

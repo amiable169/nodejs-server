@@ -10,7 +10,7 @@ module.exports = {
     exception: {
         url: '/exception',
         method: 'get',
-        handle(req, res) {
+        handle(req, res, next) {
             throw new BusinessException(40000, "业务异常");
         }
     },
